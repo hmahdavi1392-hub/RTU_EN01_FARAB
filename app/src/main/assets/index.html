@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b1220">
+<link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAACrUlEQVR42u2Z2WsTURTG+88krfvW6PwjwWcxroiKiIqIiIiIFBERERFBpYgRdyQzCb5GfHSr+zZPwiS1bba2IsfvFh8GzkzIdzO0E+iF38s5ud85v5cQcoeGlk/Kz5ZKxwFF4ANZJPz/Mx37xT0s7nWqQJYYswMnsrnUyQNJGfneln/WzgNJKd0lck/aTu5pW1INdowXeNSu5h7jQ2kGO0Yv/6Dl5B62ZCDArkpg9H6rCGRAKGqBYssfvYdmj2x73pGjL2YTw+T1PB+7KoFNd1vCUPH/SJLH5DHztcCdpjBUfiYsgDxmvhLYON4UhnLCAiaPma8FbqNBUP6RsADymPla4GZDGMrfExZAHjNfCWy40RCG8rdogV/Nvws9lrGXs9R8LXAdDYI4AVNns2xQAuuvNYSh/DVGAHU2ywYtcHVGGMpf5qMFUGezbFAC667MCIMXI2DqbJYNWuAyGgTe5xgB1NksG7TApWlh8D7N9/W1ae6zM8MogbUXp4UhCQF2ZhgtcAENAu9jnwK4z84MowTWjE0Jg/ehTwHcZ2eG0QLn0SBIRICcGUYJrD43JQzu+/4EzH12ZhgtcBYNAnciWsDU2SwblMCqM7+FwZ2YixGYEzbLBi1wGg0C912MAOpslg1a4BQaBO7bGAHU2SwblMDKk5PC0E2AzbJBC5xAg8B9EyOAOptlgxJYcXxSGEqvowVMnc2yQQscQ4OgqwCZZYMSGDlSF4bSqxgB1NksG7TA4boPpFe24iftgVsNhakzOZbovxZHDtWLQAYE/efu8MGaA2RAiH7kGN5fqwJJOdXYF5rsvpoDJOV0f7HM7q3ls3sCSSXYraeXyuzuIJ/ZFUiaMDtRb8WZnYGT2RFUgSwxVbOL9Yt9pgCRQlDMbA98IIuEvzCz0Mfiy2eRzj/mRwDi5IxEfgAAAABJRU5ErkJggg==">
+<title>Farab - RTU-EN01</title>
+<style>
+:root{--bg:#0f172a;--hd:#0b1220;--card:#1e293b;--card2:#273449;--bd:#334155;--tx:#e2e8f0;--mut:#94a3b8;
+--acc:#38bdf8;--grn:#22c55e;--red:#ef4444;--amb:#f59e0b;--off:#475569}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,"Segoe UI",Tahoma,"Vazirmatn",sans-serif;font-size:15px}
+header{background:var(--hd);padding:calc(10px + env(safe-area-inset-top)) 14px 10px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.dev{flex:none;width:112px}
+.ttl{flex:1;min-width:150px}
+.ttl h1{margin:0;font-size:22px;letter-spacing:.5px}
+.ttl div{color:var(--mut);font-size:12px;direction:ltr;text-align:start}
+.rt{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:8px}
+.brand b{display:block;font-size:14px;letter-spacing:1px}
+.brand small{color:var(--mut)}
+.pill{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--bd);border-radius:20px;padding:6px 14px;font-weight:600;font-size:13px}
+.pill i{width:11px;height:11px;border-radius:50%;background:var(--amb)}
+.pill.ok i{background:var(--grn)}.pill.bad i{background:var(--red)}
+button,.btn{font:inherit;color:var(--tx);background:var(--card2);border:1px solid var(--bd);border-radius:8px;padding:8px 14px;cursor:pointer}
+button.pri{background:var(--acc);border-color:var(--acc);color:var(--hd);font-weight:700}
+button.dng{color:var(--red)}
+button.sm{padding:5px 10px;font-size:13px}
+#chips{display:flex;gap:8px;padding:12px 14px 0;overflow-x:auto;white-space:nowrap}
+.chip{display:flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid var(--bd);border-radius:10px;background:var(--bg);color:var(--mut);flex:none}
+.chip.sel{background:var(--card);border-color:var(--acc);color:var(--tx)}
+.chip i{width:10px;height:10px;border-radius:50%;background:var(--amb)}
+.chip i.ok{background:var(--grn)}.chip i.bad{background:var(--red)}
+.chip small{color:var(--mut);direction:ltr}
+nav{display:flex;gap:6px;padding:12px 14px 0;border-bottom:1px solid var(--bd);overflow-x:auto}
+nav button{background:none;border:none;border-bottom:3px solid transparent;border-radius:0;color:var(--mut);font-weight:700;padding:8px 12px;flex:none}
+nav button.on{color:var(--acc);border-color:var(--acc)}
+main{padding:14px;max-width:1100px;margin:0 auto;padding-bottom:calc(30px + env(safe-area-inset-bottom))}
+section{display:none}section.on{display:block}
+.bar{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.bar h2{margin:0;font-size:16px;flex:1;min-width:150px}
+.chipc{background:var(--card2);color:var(--mut);border-radius:6px;padding:3px 10px;font-size:12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(78px,1fr));gap:8px;direction:ltr}
+.tile{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:10px 4px 8px;text-align:center;font-size:12px;user-select:none}
+.tile b{display:block;margin-top:6px;font-size:13px}
+.tile small{color:var(--mut)}
+.led{width:26px;height:26px;border-radius:50%;background:var(--off);margin:0 auto}
+.tile.on .led{background:var(--grn);box-shadow:0 0 12px var(--grn)}
+.tile.on small{color:var(--grn)}
+.sw{width:50px;height:26px;border-radius:13px;background:var(--off);margin:2px auto 0;position:relative;transition:.15s}
+.sw::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#e2e8f0;transition:.15s}
+.tile.on .sw{background:var(--grn)}.tile.on .sw::after{left:27px}
+.out{cursor:pointer}.out:active{border-color:var(--acc)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.acard{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:12px 14px}
+.acard .t{display:flex;align-items:center;gap:8px}
+.acard .t b{flex:1}
+.acard a{color:var(--acc);font-size:12px;cursor:pointer}
+.acard a.x{color:var(--mut);font-size:18px;line-height:1}
+.acard .s{color:var(--mut);font-size:12px;direction:ltr;text-align:start}
+.acard .v{font-size:28px;font-weight:700;margin-top:6px;direction:ltr;text-align:start}
+.acard .v small{font-size:13px;color:var(--acc);margin-inline-start:6px}
+.g{height:8px;background:var(--bg);border-radius:4px;overflow:hidden;margin:8px 0}
+.g div{height:100%;background:var(--acc);width:0}
+.wr{display:flex;gap:6px;margin-top:8px}
+input,select{font:inherit;color:var(--tx);background:var(--card2);border:1px solid var(--bd);border-radius:8px;padding:8px;direction:ltr;text-align:left;min-width:0}
+input:focus{outline:none;border-color:var(--acc)}
+.wr input{flex:1}
+.seg{display:inline-flex;border:1px solid var(--bd);border-radius:8px;overflow:hidden}
+.seg button{border:none;border-radius:0;background:var(--card2);padding:5px 14px}
+.seg button.on{background:var(--acc);color:var(--hd);font-weight:700}
+table{width:100%;border-collapse:collapse;direction:ltr;background:var(--card);border-radius:10px;overflow:hidden}
+th,td{padding:8px;text-align:center;border-bottom:1px solid var(--bd);font-size:13px}
+th{background:var(--card2);color:var(--mut);font-weight:600}
+tbody tr:nth-child(odd){background:var(--card2)}
+tr.sel{outline:2px solid var(--acc);outline-offset:-2px}
+.split{display:grid;gap:12px;grid-template-columns:1fr}
+@media(min-width:800px){.split{grid-template-columns:1fr 280px}}
+.panel{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:14px}
+.panel .big{font-size:34px;font-weight:700;direction:ltr;text-align:start}
+.form{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.form label{display:block;font-size:13px;margin-top:10px}
+.form input{width:100%;margin-top:3px}
+.form h3{margin:0;font-size:12px;color:var(--mut);letter-spacing:.5px}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.hint{color:var(--mut);font-size:12px;margin-top:10px}
+.ovl{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;padding:16px;z-index:10}
+.ovl.on{display:flex}
+.dlg{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:18px;width:100%;max-width:380px;max-height:92vh;overflow:auto}
+.dlg label{display:block;font-size:13px;margin-top:10px}
+.dlg input[type=text],.dlg input[type=number],.dlg input[type=password]{width:100%;margin-top:3px}
+.err{color:var(--red);font-size:12px;min-height:16px;margin-top:8px}
+#toast{position:fixed;bottom:calc(16px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);background:var(--card2);border:1px solid var(--bd);padding:10px 16px;border-radius:10px;display:none;z-index:20;max-width:90vw}
+footer{text-align:center;color:var(--mut);font-size:12px;padding:10px}
+code{direction:ltr;unicode-bidi:embed;background:var(--card2);padding:2px 6px;border-radius:4px;word-break:break-all}
+</style>
+</head>
+<body>
+<header>
+  <div class="dev">
+    <svg viewBox="0 0 168 84" width="112"><rect x="6" y="6" width="156" height="72" rx="9" fill="#cbd5e1" stroke="#94a3b8"/><rect x="12" y="12" width="144" height="60" rx="6" fill="#e2e8f0"/><rect x="18" y="17" width="66" height="18" fill="#1e293b"/><text x="51" y="30" fill="#f8fafc" font-size="9" font-weight="700" text-anchor="middle" font-family="Segoe UI,Arial">RTU-EN01</text><text x="51" y="47" fill="#475569" font-size="7.5" text-anchor="middle" font-family="Segoe UI,Arial">Modbus TCP</text><circle cx="24" cy="60" r="4" fill="#22c55e" stroke="#64748b"/><circle cx="40" cy="60" r="4" fill="#22c55e" stroke="#64748b"/><circle cx="56" cy="60" r="4" fill="#f59e0b" stroke="#64748b"/><circle cx="72" cy="60" r="4" fill="#7f1d1d" stroke="#64748b"/><rect x="96" y="16" width="52" height="32" fill="#475569"/><rect x="104" y="22" width="36" height="22" fill="#0f172a"/><rect x="114" y="16" width="16" height="6" fill="#475569"/><g stroke="#eab308"><line x1="107" y1="36" x2="107" y2="43"/><line x1="111" y1="36" x2="111" y2="43"/><line x1="115" y1="36" x2="115" y2="43"/><line x1="119" y1="36" x2="119" y2="43"/><line x1="123" y1="36" x2="123" y2="43"/><line x1="127" y1="36" x2="127" y2="43"/><line x1="131" y1="36" x2="131" y2="43"/><line x1="135" y1="36" x2="135" y2="43"/></g><rect x="96" y="54" width="52" height="14" fill="#334155"/><circle cx="108" cy="61" r="4" fill="#94a3b8"/><circle cx="122" cy="61" r="4" fill="#94a3b8"/><circle cx="136" cy="61" r="4" fill="#94a3b8"/></svg>
+  </div>
+  <div class="ttl"><h1>RTU-EN01</h1><div id="sub"></div></div>
+  <div class="rt">
+    <button class="sm" id="lang">EN</button>
+    <div class="brand">
+      <svg width="40" height="40" viewBox="0 0 100 100"><defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#2563eb"/></linearGradient></defs><rect x="4" y="4" width="92" height="92" rx="22" fill="url(#lg)"/><path d="M30 22h13v56H30z M30 22h42v13H30z M30 46h34v12H30z" fill="#fff"/></svg>
+      <div><b>FARAB</b><small>فاراب</small></div>
+    </div>
+    <div class="pill" id="pill"><i></i><span></span></div>
+  </div>
+</header>
+<div id="chips"></div>
+<div id="errline" class="err" style="padding:6px 14px 0"></div>
+<nav id="tabs">
+  <button data-tab="di" data-i="inputs"></button>
+  <button data-tab="do" data-i="outputs"></button>
+  <button data-tab="an" data-i="analog"></button>
+  <button data-tab="cfg" data-i="settings"></button>
+</nav>
+<main>
+  <section id="tab-di">
+    <div class="bar"><h2 data-i="di_title"></h2><span id="di_cnt" class="chipc"></span>
+      <span id="di_btn"></span></div>
+    <div class="grid" id="di"></div>
+  </section>
+  <section id="tab-do">
+    <div class="bar"><h2 data-i="do_title"></h2><span id="do_cnt" class="chipc"></span>
+      <span id="do_btn"></span></div>
+    <div class="grid" id="do"></div>
+  </section>
+  <section id="tab-an">
+    <div class="bar"><h2 data-i="an_title"></h2>
+      <div class="seg"><button id="v_cards" data-i="cards"></button><button id="v_table" data-i="table"></button></div>
+      <span id="an_btn"></span></div>
+    <div id="an_cards" class="cards"></div>
+    <div id="an_table" class="split"><div style="overflow-x:auto"><table><thead><tr><th>RCR</th><th>Addr</th><th>Unsigned</th><th>Hex</th><th>Signed</th></tr></thead><tbody id="tb"></tbody></table></div>
+      <div class="panel"><div class="s" id="sel_name" style="color:var(--acc);font-weight:700;direction:ltr;text-align:start">-</div>
+        <div class="big" id="sel_val">-</div><div class="hint" id="sel_info" style="direction:ltr;text-align:start"></div>
+        <div class="g" style="margin-top:12px"><div id="sel_g"></div></div>
+        <label class="hint" data-i="register"></label><input id="w_idx" type="number" style="width:100%">
+        <label class="hint" data-i="value"></label><input id="w_val" type="number" style="width:100%">
+        <div class="row"><button class="pri" id="w_btn" data-i="write"></button></div></div></div>
+  </section>
+  <section id="tab-cfg">
+    <div class="form" id="form"></div>
+    <div class="row"><button class="pri" id="apply" data-i="apply"></button><button id="defaults" data-i="defaults"></button><button class="dng" id="rmdev" data-i="remove_dev"></button></div>
+    <div class="panel" style="margin-top:16px">
+      <label style="display:flex;gap:8px;align-items:center;font-size:14px"><input type="checkbox" id="confirmOut" style="width:auto"> <span data-i="confirm_out"></span></label>
+    </div>
+  </section>
+</main>
+<footer>Developed by Farab | فاراب</footer>
+
+<div class="ovl" id="ovl_card"><div class="dlg">
+  <b data-i="card_title"></b>
+  <label data-i="card_name"></label><input type="text" id="c_name">
+  <label data-i="card_rcr"></label><input type="number" id="c_rcr">
+  <label data-i="card_unit"></label><input type="text" id="c_unit">
+  <label data-i="card_scale"></label><input type="text" id="c_scale" inputmode="decimal">
+  <label data-i="card_offset"></label><input type="text" id="c_offset" inputmode="decimal">
+  <label style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="c_signed" style="width:auto"> <span data-i="card_signed"></span></label>
+  <div class="err" id="c_err"></div>
+  <div class="row" style="justify-content:flex-end"><button id="c_cancel" data-i="cancel"></button><button class="pri" id="c_save" data-i="save"></button></div>
+</div></div>
+<div class="ovl" id="ovl_pin"><div class="dlg">
+  <b data-i="pin_title"></b>
+  <input type="password" id="pin_in" inputmode="numeric" style="width:100%;margin-top:10px">
+  <div class="err" id="pin_err"></div>
+  <div class="row" style="justify-content:flex-end"><button class="pri" id="pin_ok" data-i="ok"></button></div>
+</div></div>
+<div id="toast"></div>
+
+<script>
+'use strict';
+const DEFCFG={name:'RTU-EN01',ip:'192.168.0.20',port:502,unit:1,interval:500,di_n:16,do_n:16,rcr_start:0,rcr_n:16,di_base:1024,do_base:1280,rcr_base:12288,analog:[]};
+const I18N={
+en:{inputs:'Inputs',outputs:'Outputs',analog:'Analog',settings:'Settings',connected:'Connected',disconnected:'Disconnected',connecting:'Connecting...',server_down:'Server unreachable',
+add_device:'+ Device',active:'active',di_title:'Digital inputs (RX)',do_title:'Digital outputs (RY) - tap to switch',an_title:'Analog (RCR registers)',cards:'Cards',table:'Table',
+add_card:'+ Add analog card',no_cards:'No analog cards yet. Tap "+ Add analog card" to add a channel.',write:'Write',value:'Value',register:'Register #',save:'Save',cancel:'Cancel',
+remove_card:'Remove this card?',edit:'edit',card_title:'Analog card',card_name:'Card name',card_rcr:'RCR register # (0 - 399)',card_unit:'Unit (V, mA, %, bar ...)',
+card_scale:'Scale (value = raw x scale + offset)',card_offset:'Offset',card_signed:'Signed (16-bit, negative values)',
+g_conn:'CONNECTION',g_chan:'CHANNELS',g_base:'BASE ADDRESSES (0-BASED)',name:'Device name',ip:'IP address',port:'Port',unit:'Unit ID',interval:'Poll interval (ms)',
+di_n:'Digital inputs',do_n:'Digital outputs',rcr_start:'First RCR #',rcr_n:'RCR count',di_base:'RX base',do_base:'RY base',rcr_base:'RCR base',
+apply:'Apply',defaults:'Defaults',remove_dev:'Remove device',confirm_remove:'Remove this device?',last_dev:'At least one device must remain.',
+confirm_out:'Ask for confirmation before switching an output',confirm_sw:'Switch %s ?',phone:'Open on the phone (same Wi-Fi):',pin_title:'Enter access PIN',pin_wrong:'Wrong PIN',ok:'OK',
+limit:'Limit reached',bad_number:'Invalid number',out_range:'Value outside 16-bit range',write_err:'Write error: ',card_bad:'Check register (0-399), scale and offset',
+pick_row:'Select a row',waiting:'waiting for data',sub:'Delta Modbus TCP remote I/O',rcr_note:'Max: 256 inputs, 256 outputs, 400 registers.'},
+fa:{inputs:'ورودی‌ها',outputs:'خروجی‌ها',analog:'آنالوگ',settings:'تنظیمات',connected:'متصل',disconnected:'قطع',connecting:'در حال اتصال…',server_down:'سرور در دسترس نیست',
+add_device:'+ دستگاه',active:'فعال',di_title:'ورودی‌های دیجیتال (RX)',do_title:'خروجی‌های دیجیتال (RY) - برای تغییر لمس کنید',an_title:'آنالوگ (رجیسترهای RCR)',cards:'کارت‌ها',table:'جدول',
+add_card:'+ افزودن کارت آنالوگ',no_cards:'هنوز کارت آنالوگی نیست. با «+ افزودن کارت آنالوگ» یک کانال اضافه کنید.',write:'نوشتن',value:'مقدار',register:'شماره رجیستر',save:'ذخیره',cancel:'انصراف',
+remove_card:'این کارت حذف شود؟',edit:'ویرایش',card_title:'کارت آنالوگ',card_name:'نام کارت',card_rcr:'شماره رجیستر RCR (۰ تا ۳۹۹)',card_unit:'واحد (V، mA، %، bar ...)',
+card_scale:'ضریب Scale (مقدار = raw × scale + offset)',card_offset:'آفست Offset',card_signed:'علامت‌دار (۱۶ بیتی، مقدار منفی)',
+g_conn:'اتصال',g_chan:'کانال‌ها',g_base:'آدرس‌های پایه (صفر-مبنا)',name:'نام دستگاه',ip:'آدرس IP',port:'پورت',unit:'Unit ID',interval:'دوره خواندن (ms)',
+di_n:'تعداد ورودی دیجیتال',do_n:'تعداد خروجی دیجیتال',rcr_start:'شروع RCR',rcr_n:'تعداد RCR',di_base:'Base ورودی (RX)',do_base:'Base خروجی (RY)',rcr_base:'Base رجیستر (RCR)',
+apply:'اعمال',defaults:'پیش‌فرض',remove_dev:'حذف دستگاه',confirm_remove:'این دستگاه حذف شود؟',last_dev:'حداقل یک دستگاه باید باقی بماند.',
+confirm_out:'قبل از تغییر خروجی تأیید بگیر',confirm_sw:'%s تغییر کند؟',phone:'باز کردن روی گوشی (همان Wi-Fi):',pin_title:'رمز دسترسی (PIN) را وارد کنید',pin_wrong:'رمز اشتباه است',ok:'تأیید',
+limit:'به حداکثر رسید',bad_number:'عدد نامعتبر',out_range:'مقدار خارج از محدوده ۱۶ بیتی است',write_err:'خطای نوشتن: ',card_bad:'رجیستر (۰ تا ۳۹۹)، ضریب و آفست را بررسی کنید',
+pick_row:'یک ردیف را انتخاب کنید',waiting:'در انتظار داده',sub:'Delta Modbus TCP remote I/O',rcr_note:'حداکثر: ۲۵۶ ورودی، ۲۵۶ خروجی، ۴۰۰ رجیستر.'}};
+
+let lang=localStorage.getItem('lang')||'fa';
+let PIN=localStorage.getItem('pin')||'';
+let confirmOut=localStorage.getItem('confirmOut')!=='0';
+let devices=[],cur=null,state=null,status={},devRev={},timer=null;
+let tilesDI=[],tilesDO=[],cardEls=[],rows=[],selReg=null,anView=null,tab='di',editing=null;
+const $=s=>document.querySelector(s);
+const t=k=>(I18N[lang][k]??I18N.en[k]??k);
+function el(tag,attrs,...kids){const e=document.createElement(tag);for(const k in (attrs||{})){const v=attrs[k];if(k==='class')e.className=v;else if(k.startsWith('on'))e.addEventListener(k.slice(2),v);else e.setAttribute(k,v);}for(const c of kids.flat())if(c!=null)e.append(c.nodeType?c:document.createTextNode(c));return e;}
+function toast(msg){const e=$('#toast');e.textContent=msg;e.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(()=>e.style.display='none',3500);}
+function fmt(x){return (Math.round(x*1000)/1000).toString();}
+const curDev=()=>devices.find(d=>d.id===cur);
+
+let _bid=0;const _bp={};
+function bridge(method,path,body){return new Promise(res=>{const id=++_bid;_bp[id]=res;AndroidBridge.call(id,method,path,body||'');});}
+window.__bridgeResult=(id,json)=>{const r=_bp[id];delete _bp[id];if(r)r(JSON.parse(json));};
+async function api(path,opt){
+  if(window.AndroidBridge)return bridge((opt&&opt.method)||'GET',path,(opt&&opt.body)||'');
+  opt=opt||{};opt.headers=Object.assign({'X-Pin':PIN},opt.headers||{});
+  const r=await fetch(path,opt);
+  if(r.status===401){showPin();throw new Error('pin');}
+  return r.json();
+}
+function showPin(){$('#ovl_pin').classList.add('on');$('#pin_err').textContent=PIN?t('pin_wrong'):'';}
+$('#pin_ok').onclick=()=>{PIN=$('#pin_in').value.trim();localStorage.setItem('pin',PIN);$('#ovl_pin').classList.remove('on');boot();};
+$('#pin_in').addEventListener('keydown',e=>{if(e.key==='Enter')$('#pin_ok').click();});
+
+// ---------- language / static text
+function applyLang(){
+  document.documentElement.lang=lang;document.documentElement.dir=lang==='fa'?'rtl':'ltr';
+  $('#lang').textContent=lang==='fa'?'EN':'فا';
+  document.querySelectorAll('[data-i]').forEach(e=>e.textContent=t(e.dataset.i));
+}
+$('#lang').onclick=()=>{lang=lang==='fa'?'en':'fa';localStorage.setItem('lang',lang);applyLang();buildAll();};
+
+// ---------- tabs
+function showTab(k){tab=k;document.querySelectorAll('section').forEach(s=>s.classList.toggle('on',s.id==='tab-'+k));
+  document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('on',b.dataset.tab===k));}
+document.querySelectorAll('#tabs button').forEach(b=>b.onclick=()=>showTab(b.dataset.tab));
+function showAnalog(v){anView=v;$('#an_cards').style.display=v==='cards'?'':'none';$('#an_table').style.display=v==='table'?'':'none';
+  $('#v_cards').classList.toggle('on',v==='cards');$('#v_table').classList.toggle('on',v==='table');buildAnBtn();}
+$('#v_cards').onclick=()=>showAnalog('cards');$('#v_table').onclick=()=>showAnalog('table');
+
+// ---------- devices
+async function loadDevices(keep){
+  const r=await api('/api/devices');
+  devices=r.devices;devRev={};devices.forEach(d=>devRev[d.id]=d.rev);
+  if(!devices.find(d=>d.id===cur))cur=(keep&&devices.find(d=>d.id===keep)?keep:devices[0].id);
+  buildAll();
+}
+async function saveDevices(list,select){
+  const before=new Set(devices.map(d=>d.id));
+  const r=await api('/api/devices',{method:'POST',body:JSON.stringify(list)});
+  if(r.error){toast(r.error);return;}
+  devices=r.devices;devRev={};devices.forEach(d=>devRev[d.id]=d.rev);
+  const added=devices.find(d=>!before.has(d.id));
+  if(select&&added)cur=added.id;
+  if(!devices.find(d=>d.id===cur))cur=devices[0].id;
+  state=null;buildAll();tick(true);
+}
+const listWith=(id,cfg)=>devices.map(d=>({id:d.id,cfg:d.id===id?cfg:d.cfg}));
+function saveCfg(cfg){return saveDevices(listWith(cur,cfg));}
+function addDevice(){
+  const c=JSON.parse(JSON.stringify(curDev().cfg));c.name='RTU-EN01 #'+(devices.length+1);
+  const p=c.ip.split('.');if(p.length===4&&!isNaN(p[3]))c.ip=p.slice(0,3).join('.')+'.'+Math.min(254,+p[3]+1);
+  saveDevices(devices.map(d=>({id:d.id,cfg:d.cfg})).concat([{id:'',cfg:c}]),true).then(()=>showTab('cfg'));
+}
+function removeDevice(){
+  if(devices.length===1){toast(t('last_dev'));return;}
+  if(!confirm(t('confirm_remove')))return;
+  saveDevices(devices.filter(d=>d.id!==cur).map(d=>({id:d.id,cfg:d.cfg})));
+}
+let chipDots={};
+function renderChips(){
+  const box=$('#chips');box.textContent='';chipDots={};
+  devices.forEach(d=>{
+    const dot=el('i');chipDots[d.id]=dot;
+    box.append(el('div',{class:'chip'+(d.id===cur?' sel':''),onclick:()=>{cur=d.id;state=null;anView=null;buildAll();tick(true);}},
+      dot,d.cfg.name,el('small',{},d.cfg.ip)));
+  });
+  box.append(el('button',{class:'sm',onclick:addDevice},t('add_device')));
+  updateChipDots();
+}
+function updateChipDots(){for(const id in chipDots){const s=status[id];chipDots[id].className=s===true?'ok':s===false?'bad':'';}}
+
+// ---------- build UI for current device
+function btnGroup(key,cap){
+  const w=el('span');
+  [['- 8',-8],['+ 8',8],['+ 16',16],['+ 32',32]].forEach(([tx,dl])=>
+    w.append(el('button',{class:'sm',style:'margin-inline-start:4px',onclick:()=>changeCount(key,dl,cap)},tx)));
+  return w;
+}
+function changeCount(key,dl,cap){
+  const cfg=JSON.parse(JSON.stringify(curDev().cfg));const n=Math.max(0,Math.min(cap,cfg[key]+dl));
+  if(n===cfg[key]){toast(t('limit')+' ('+cap+')');return;}
+  cfg[key]=n;saveCfg(cfg);
+}
+function buildAnBtn(){
+  const b=$('#an_btn');b.textContent='';
+  if(anView==='cards')b.append(el('button',{class:'sm pri',onclick:()=>openCard(null)},t('add_card')));
+  else b.append(btnGroup('rcr_n',400));
+}
+function buildAll(){
+  const d=curDev();if(!d)return;const c=d.cfg;
+  applyLang();renderChips();
+  $('#sub').textContent=t('sub')+'  |  '+c.name+'  |  '+c.ip+':'+c.port+'  |  Unit '+c.unit;
+  $('#di_btn').textContent='';$('#di_btn').append(btnGroup('di_n',256));
+  $('#do_btn').textContent='';$('#do_btn').append(btnGroup('do_n',256));
+  // digital tiles
+  const di=$('#di');di.textContent='';tilesDI=[];
+  for(let i=0;i<c.di_n;i++){const e=el('div',{class:'tile'},el('div',{class:'led'}),el('b',{},'X'+i),el('small',{},'OFF'));di.append(e);tilesDI.push(e);}
+  const dO=$('#do');dO.textContent='';tilesDO=[];
+  for(let i=0;i<c.do_n;i++){const e=el('div',{class:'tile out',onclick:()=>toggleDO(i)},el('div',{class:'sw'}),el('b',{},'Y'+i),el('small',{},'OFF'));dO.append(e);tilesDO.push(e);}
+  // analog cards
+  const box=$('#an_cards');box.textContent='';cardEls=[];
+  if(!c.analog.length)box.append(el('div',{class:'hint'},t('no_cards')));
+  c.analog.forEach((ch,i)=>{
+    const val=el('span',{},'-'),unit=el('small',{},ch.unit),info=el('div',{class:'s'},'-'),g=el('div'),inp=el('input',{type:'text',inputmode:'decimal'});
+    const send=()=>{if(inp.value.trim()){writeChannel(ch,inp.value.trim());inp.value='';}};
+    inp.addEventListener('keydown',e=>{if(e.key==='Enter')send();});
+    box.append(el('div',{class:'acard'},
+      el('div',{class:'t'},el('b',{},ch.name),el('a',{onclick:()=>openCard(i)},t('edit')),el('a',{class:'x',onclick:()=>delCard(i)},'\u00d7')),
+      el('div',{class:'s'},'RCR-'+ch.rcr+'  (addr '+(c.rcr_base+ch.rcr)+')'),
+      el('div',{class:'v'},val,unit),info,el('div',{class:'g'},g),
+      el('div',{class:'wr'},inp,el('button',{class:'sm',onclick:send},t('write')))));
+    cardEls.push({ch,val,info,g});
+  });
+  // table
+  const tb=$('#tb');tb.textContent='';rows=[];selReg=null;
+  for(let i=0;i<c.rcr_n;i++){const n=c.rcr_start+i;
+    const tds=[el('td',{},'RCR-'+n),el('td',{},String(c.rcr_base+n)),el('td',{},'-'),el('td',{},'-'),el('td',{},'-')];
+    const tr=el('tr',{onclick:()=>selectRow(i)},tds);tb.append(tr);rows.push({tr,tds});}
+  showSel();
+  // settings form
+  buildForm();$('#confirmOut').checked=confirmOut;
+  if(anView==null)showAnalogDefault();else showAnalog(anView);
+  showTab(tab);renderState();
+}
+function showAnalogDefault(){showAnalog(curDev().cfg.analog.length?'cards':'table');}
+
+const FIELDS=[['g_conn',['name','ip','port','unit','interval']],['g_chan',['di_n','do_n','rcr_start','rcr_n']],['g_base',['di_base','do_base','rcr_base']]];
+function buildForm(){
+  const c=curDev().cfg,f=$('#form');f.textContent='';
+  FIELDS.forEach(([g,keys])=>{
+    const box=el('div',{class:'panel'},el('h3',{},t(g)));
+    keys.forEach(k=>box.append(el('label',{},t(k),el('input',{id:'f_'+k,type:(k==='name'||k==='ip')?'text':'number',value:c[k]}))));
+    f.append(box);
+  });
+  f.append(el('div',{class:'hint'},t('rcr_note')));
+}
+function readForm(){
+  const cfg=JSON.parse(JSON.stringify(curDev().cfg));
+  for(const [,keys] of FIELDS)for(const k of keys){const v=$('#f_'+k).value.trim();
+    if(k==='name'||k==='ip')cfg[k]=v;else{const n=parseInt(v,10);if(isNaN(n)){toast(t('bad_number'));return null;}cfg[k]=Math.max(0,n);}}
+  return cfg;
+}
+$('#apply').onclick=()=>{const c=readForm();if(c)saveCfg(c);};
+$('#defaults').onclick=()=>{const c=JSON.parse(JSON.stringify(DEFCFG));c.analog=curDev().cfg.analog;saveCfg(c);};
+$('#rmdev').onclick=removeDevice;
+$('#confirmOut').onchange=e=>{confirmOut=e.target.checked;localStorage.setItem('confirmOut',confirmOut?'1':'0');};
+
+// ---------- analog card dialog
+function openCard(i){
+  editing=i;const ch=i==null?{name:'Analog',rcr:0,unit:'',scale:1,offset:0,signed:false}:curDev().cfg.analog[i];
+  $('#c_name').value=ch.name;$('#c_rcr').value=ch.rcr;$('#c_unit').value=ch.unit;$('#c_scale').value=ch.scale;$('#c_offset').value=ch.offset;$('#c_signed').checked=ch.signed;
+  $('#c_err').textContent='';$('#ovl_card').classList.add('on');
+}
+$('#c_cancel').onclick=()=>$('#ovl_card').classList.remove('on');
+$('#c_save').onclick=()=>{
+  const rcr=parseInt($('#c_rcr').value,10),sc=parseFloat($('#c_scale').value.replace(',','.')),of=parseFloat($('#c_offset').value.replace(',','.'));
+  if(isNaN(rcr)||rcr<0||rcr>399||isNaN(sc)||sc===0||isNaN(of)){$('#c_err').textContent=t('card_bad');return;}
+  const ch={name:$('#c_name').value.trim()||'Analog',rcr,unit:$('#c_unit').value.trim(),scale:sc,offset:of,signed:$('#c_signed').checked};
+  const cfg=JSON.parse(JSON.stringify(curDev().cfg));
+  if(editing==null)cfg.analog.push(ch);else cfg.analog[editing]=ch;
+  $('#ovl_card').classList.remove('on');anView='cards';saveCfg(cfg);
+};
+function delCard(i){if(!confirm(t('remove_card')))return;const cfg=JSON.parse(JSON.stringify(curDev().cfg));cfg.analog.splice(i,1);saveCfg(cfg);}
+
+// ---------- table selection
+function selectRow(i){selReg=i;$('#w_idx').value=curDev().cfg.rcr_start+i;showSel();}
+function showSel(){
+  const c=curDev().cfg;rows.forEach((r,i)=>r.tr.classList.toggle('sel',i===selReg));
+  const v=state&&state.rcr?state.rcr[selReg]:undefined;
+  if(selReg==null||v===undefined){$('#sel_name').textContent=selReg==null?'-':'RCR-'+(c.rcr_start+selReg);$('#sel_val').textContent='-';
+    $('#sel_info').textContent=selReg==null?t('pick_row'):t('waiting');$('#sel_g').style.width='0';return;}
+  const n=c.rcr_start+selReg;$('#sel_name').textContent='RCR-'+n+'  (addr '+(c.rcr_base+n)+')';
+  $('#sel_val').textContent=v;$('#sel_info').textContent='0x'+v.toString(16).toUpperCase().padStart(4,'0')+'  |  signed '+(v>32767?v-65536:v);
+  $('#sel_g').style.width=(100*v/65535)+'%';
+}
+
+// ---------- live values
+function setPill(cls,txt){const p=$('#pill');p.className='pill '+cls;p.lastChild.textContent=txt;}
+function renderState(){
+  const d=curDev();if(!d)return;const c=d.cfg;
+  const s=state&&state.rev===devRev[d.id]?state:null;
+  if(!s){setPill('',t('connecting'));$('#errline').textContent='';return;}
+  setPill(s.ok?'ok':'bad',s.ok?t('connected'):t('disconnected'));
+  s.di.forEach((v,i)=>{const e=tilesDI[i];if(e){e.classList.toggle('on',!!v);e.lastChild.textContent=v?'ON':'OFF';}});
+  s.do.forEach((v,i)=>{const e=tilesDO[i];if(e){e.classList.toggle('on',!!v);e.lastChild.textContent=v?'ON':'OFF';}});
+  if(s.di.length)$('#di_cnt').textContent=s.di.filter(x=>x).length+' / '+s.di.length+' '+t('active');
+  if(s.do.length)$('#do_cnt').textContent=s.do.filter(x=>x).length+' / '+s.do.length+' '+t('active');
+  cardEls.forEach(({ch,val,info,g})=>{
+    const raw=s.an?s.an[String(ch.rcr)]:undefined;if(raw===undefined){val.textContent='-';info.textContent='-';g.style.width='0';return;}
+    const sr=ch.signed&&raw>32767?raw-65536:raw;val.textContent=fmt(sr*ch.scale+ch.offset);
+    info.textContent='raw '+sr+'  |  0x'+raw.toString(16).toUpperCase().padStart(4,'0');g.style.width=(100*raw/65535)+'%';});
+  s.rcr.forEach((v,i)=>{const r=rows[i];if(!r)return;r.tds[2].textContent=v;r.tds[3].textContent='0x'+v.toString(16).toUpperCase().padStart(4,'0');r.tds[4].textContent=v>32767?v-65536:v;});
+  showSel();
+  $('#errline').textContent=s.ok?'':(Object.values(s.errors)[0]||'');
+}
+let busy=false,again=false;
+async function tick(){
+  if(busy){again=true;return;}
+  busy=true;clearTimeout(timer);let delay=800;
+  try{
+    const d=curDev();
+    if(d){
+      const r=await api('/api/state?id='+d.id);status=r.status;
+      const changed=Object.keys(r.revs).length!==devices.length||Object.keys(r.revs).some(k=>devRev[k]!==r.revs[k]);
+      if(changed){await loadDevices(cur);}
+      else{state=r.state;updateChipDots();renderState();}
+      delay=Math.max(400,Math.min(2000,d.cfg.interval));
+    }
+  }catch(e){if(e.message!=='pin')setPill('bad',t('server_down'));}
+  busy=false;timer=setTimeout(tick,again?50:delay);again=false;
+}
+
+// ---------- writes
+async function doWrite(body){
+  try{const r=await api('/api/write',{method:'POST',body:JSON.stringify(Object.assign({id:cur},body))});
+    if(!r.ok){toast(t('write_err')+r.error);return false;}tick(true);return true;}
+  catch(e){return false;}
+}
+function toggleDO(i){
+  const c=curDev().cfg,v=state&&state.do?state.do[i]:0;
+  if(confirmOut&&!confirm(t('confirm_sw').replace('%s','Y'+i+' ('+(v?'ON':'OFF')+' \u2192 '+(v?'OFF':'ON')+')')))return;
+  doWrite({type:'coil',addr:c.do_base+i,value:!v});
+}
+function writeChannel(ch,text){
+  const x=parseFloat(text.replace(',','.'));if(isNaN(x)){toast(t('bad_number'));return;}
+  const raw=Math.round((x-ch.offset)/ch.scale);if(raw<-32768||raw>65535){toast(t('out_range'));return;}
+  doWrite({type:'reg',addr:curDev().cfg.rcr_base+ch.rcr,value:raw});
+}
+$('#w_btn').onclick=()=>{
+  const n=parseInt($('#w_idx').value,10),v=parseInt($('#w_val').value,10);
+  if(isNaN(n)||isNaN(v)||n<0||n>399){toast(t('bad_number'));return;}
+  if(v<-32768||v>65535){toast(t('out_range'));return;}
+  doWrite({type:'reg',addr:curDev().cfg.rcr_base+n,value:v});$('#w_val').value='';
+};
+
+// ---------- phone link
+async function loadInfo(){
+  try{const r=await api('/api/info');
+    $('#phoneurl').textContent=r.local?'http://127.0.0.1:'+r.port:'http://'+r.ip+':'+r.port+'/?pin='+r.pin;}catch(e){}
+}
+
+async function boot(){
+  const u=new URL(location.href);const p=u.searchParams.get('pin');
+  if(p){PIN=p;localStorage.setItem('pin',p);u.searchParams.delete('pin');history.replaceState(null,'',u.pathname+u.search);}
+  applyLang();showTab('di');
+  try{await loadDevices();loadInfo();tick(true);}catch(e){}
+}
+boot();
+</script>
+</body>
+</html>
